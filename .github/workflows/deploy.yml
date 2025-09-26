@@ -3,7 +3,7 @@ name: Deploy to FTP
 on:
   push:
     branches:
-      - main   # деплой из основной ветки
+      - swagger   # деплой из основной ветки
 
 jobs:
   build-and-deploy:
