@@ -1,9 +1,9 @@
-name: 🚀 Deploy to FTP
+name: Deploy to FTP
 
 on:
   push:
     branches:
-      - main
+      - main   # деплой из основной ветки
 
 jobs:
   build-and-deploy:
@@ -16,19 +16,22 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: "18"
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build project
-        run: npm run build   # создаст out/ автоматически
+        run: npm run build
+
+      - name: Export static site
+        run: npm run export
 
       - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@v4
         with:
-          server: ftp.hub-game.ru
+          server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./out/
-          server-dir: /www/hub-game.ru/
+          server-dir: www/hub-game.ru/
