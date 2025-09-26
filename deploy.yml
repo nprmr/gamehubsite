@@ -3,20 +3,32 @@ name: 🚀 Deploy to FTP
 on:
   push:
     branches:
-      - main   # или master, если у тебя так называется
+      - main   # или master, если главная ветка называется так
 
 jobs:
-  ftp-deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
 
-      - name: FTP Deploy
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18   # или версия, которая у тебя в проекте
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build && npm run export   # создаст папку out/
+
+      - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ftp.yourhost.com
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./   # что заливать (например ./dist если билд)
-          server-dir: /public_html/  # папка на хостинге
+          local-dir: ./out
+          server-dir: /www/hub-game.ru/  # сюда грузишь сайт

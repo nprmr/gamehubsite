@@ -19,7 +19,7 @@ export default function HomePage() {
           hover:bg-neutral-200
         "
         >
-          Играть
+          Смотреть
         </motion.button>
       </main>
   );
