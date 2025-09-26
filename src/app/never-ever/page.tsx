@@ -90,11 +90,7 @@ export default function NeverEverPage() {
                 const data: Category[] = await res.json();
                 setCategories(data);
             } catch (err: unknown) {
-                if (err instanceof Error) {
-                    setError(err.message);
-                } else {
-                    setError("Неизвестная ошибка");
-                }
+                setError(err instanceof Error ? err.message : "Неизвестная ошибка");
             } finally {
                 setLoading(false);
             }
