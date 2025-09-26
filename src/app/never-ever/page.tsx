@@ -6,6 +6,15 @@ import Chip from "@/components/Chip";
 import CategoryCard from "@/components/CategoryCard";
 import PlayButton from "@/components/PlayButton";
 import Container from "@/components/Container";
+import { useEffect, useState } from "react";
+
+/** ===== Типы ===== */
+interface Category {
+    id: number;
+    label: string;
+    icon: string;
+    color?: string;
+}
 
 /** ===== Анимационные пресеты ===== */
 const springFast: Transition = { type: "spring", stiffness: 400, damping: 25 };
@@ -62,6 +71,33 @@ const descriptionLines = [
 ];
 
 export default function NeverEverPage() {
+    /** ====== Получение категорий через локальный API ====== */
+    const [categories, setCategories] = useState<Category[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        void (async () => {
+            try {
+                const res = await fetch("/api/categories", { cache: "no-store" });
+                if (!res.ok) {
+                    setError(`Ошибка ${res.status}`);
+                    return;
+                }
+                const data: Category[] = await res.json();
+                setCategories(data);
+            } catch (err: unknown) {
+                if (err instanceof Error) {
+                    setError(err.message);
+                } else {
+                    setError("Неизвестная ошибка");
+                }
+            } finally {
+                setLoading(false);
+            }
+        })();
+    }, []);
+
     return (
         <main className="neverever-page min-h-screen flex flex-col items-center relative">
             {/* Заголовок + Rive */}
@@ -129,6 +165,9 @@ export default function NeverEverPage() {
                     Список категорий:
                 </motion.h2>
 
+                {loading && <p className="text-white">Загрузка категорий...</p>}
+                {error && <p className="text-red-500">{error}</p>}
+
                 <motion.div
                     variants={categoriesContainer}
                     initial="hidden"
@@ -136,24 +175,13 @@ export default function NeverEverPage() {
                     viewport={{ once: true, amount: 0.2 }}
                     className="categories"
                 >
-                    {[
-                        ["Друзья и компании", "/rive/fire.riv"],
-                        ["Детство", "/rive/childhood.riv"],
-                        ["Семья", "/rive/family.riv"],
-                        ["Здоровье и тело", "/rive/heart.riv"],
-                        ["Алкогольные истории", "/rive/alcohol.riv"],
-                        ["Секс и интим", "/rive/sex.riv"],
-                        ["Фантазии и мечты", "/rive/dream.riv"],
-                        ["Путешествия", "/rive/travel.riv"],
-                        ["Страх и адреналин", "/rive/fear.riv"],
-                        ["Отношения и свидания", "/rive/date.riv"],
-                        ["Работа и учеба", "/rive/work.riv"],
-                        ["Стыд и позор", "/rive/shame.riv"],
-                        ["Интернет и соц.сети", "/rive/internet.riv"],
-                        ["Игры и развлечения", "/rive/game.riv"],
-                    ].map(([label, src], idx) => (
-                        <motion.div key={idx} variants={categoryItem}>
-                            <CategoryCard label={label} src={src} />
+                    {categories.map((cat) => (
+                        <motion.div key={cat.id} variants={categoryItem}>
+                            <CategoryCard
+                                label={cat.label}
+                                src={cat.icon}
+                                color={cat.color}
+                            />
                         </motion.div>
                     ))}
                 </motion.div>
@@ -169,7 +197,7 @@ export default function NeverEverPage() {
         "
             >
                 <div className="pointer-events-auto flex justify-center w-full">
-                    <PlayButton text="Играть" onClick={() => console.log('Play clicked')} />
+                    <PlayButton text="Играть" onClick={() => console.log("Play clicked")} />
                 </div>
             </div>
         </main>

@@ -14,7 +14,7 @@ interface CategoryCardProps {
 }
 
 // Оборачиваем Squircle с типами
-const MotionSquircle = motion(
+const MotionSquircle = motion.create(
     Squircle as ComponentType<React.ComponentProps<typeof Squircle>>
 );
 
