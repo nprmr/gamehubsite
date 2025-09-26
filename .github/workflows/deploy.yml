@@ -16,13 +16,13 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18   # версия для Next.js 15 подходит
+          node-version: 18
 
       - name: Install dependencies
         run: npm install
 
       - name: Build project
-        run: npm run build && npm run export   # создаст папку out/
+        run: npm run build   # создаст out/ автоматически
 
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
@@ -31,4 +31,4 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./out
-          server-dir: /www/hub-game.ru/   # папка твоего сайта
+          server-dir: /www/hub-game.ru/
