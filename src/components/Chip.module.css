@@ -1,0 +1,13 @@
+.squircle {
+    /* Цвет рамки */
+    background: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 24px;
+}
+
+/* Заливка внутри чипса */
+.squircle::before {
+    background: transparent; /* прозрачный фон */
+}
