@@ -71,7 +71,7 @@ const descriptionLines = [
 ];
 
 export default function NeverEverPage() {
-    /** ====== Получение категорий напрямую с client API ====== */
+    /** ====== Получение категорий ====== */
     const [categories, setCategories] = useState<Category[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -79,10 +79,10 @@ export default function NeverEverPage() {
     useEffect(() => {
         void (async () => {
             try {
-                const res = await fetch(
-                    "https://gamehub-client.monkeyslab.ru/api/games/never-ever/categories",
-                    { cache: "no-store" }
-                );
+                // ⚡️ Используем относительный путь — /api/
+                const res = await fetch("/api/games/never-ever/categories", {
+                    cache: "no-store",
+                });
                 if (!res.ok) {
                     setError(`Ошибка ${res.status}`);
                     return;
