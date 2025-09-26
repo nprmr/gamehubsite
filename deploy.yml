@@ -1,0 +1,22 @@
+name: 🚀 Deploy to FTP
+
+on:
+  push:
+    branches:
+      - main   # или master, если у тебя так называется
+
+jobs:
+  ftp-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: FTP Deploy
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ftp.yourhost.com
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./   # что заливать (например ./dist если билд)
+          server-dir: /public_html/  # папка на хостинге
