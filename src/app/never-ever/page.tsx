@@ -16,7 +16,7 @@ const chipsContainer: Variants = {
     hidden: { opacity: 0 },
     visible: {
         opacity: 1,
-        transition: { delayChildren: 0.2, staggerChildren: 0.18, when: "beforeChildren" },
+        transition: { delayChildren: 0.2, staggerChildren: 0.18 },
     },
 };
 const chipItem: Variants = {
@@ -27,7 +27,7 @@ const textContainer: Variants = {
     hidden: { opacity: 0 },
     visible: {
         opacity: 1,
-        transition: { delayChildren: 0.4, staggerChildren: 0.1, when: "beforeChildren" },
+        transition: { delayChildren: 0.4, staggerChildren: 0.1 },
     },
 };
 const textLine: Variants = {
@@ -163,7 +163,6 @@ export default function NeverEverPage() {
             <div
                 className="
           w-full flex justify-center
-          md:static md:mt-[60px] md:mb-[100px]
           fixed bottom-4 left-0 right-0 md:relative
           pointer-events-none md:pointer-events-auto
           safe-bottom
