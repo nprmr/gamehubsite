@@ -3,7 +3,7 @@ name: 🚀 Deploy to FTP
 on:
   push:
     branches:
-      - main   # или master, если главная ветка называется так
+      - main
 
 jobs:
   build-and-deploy:
@@ -16,7 +16,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18   # или версия, которая у тебя в проекте
+          node-version: 18   # версия для Next.js 15 подходит
 
       - name: Install dependencies
         run: npm install
@@ -31,4 +31,4 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./out
-          server-dir: /www/hub-game.ru/  # сюда грузишь сайт
+          server-dir: /www/hub-game.ru/   # папка твоего сайта
