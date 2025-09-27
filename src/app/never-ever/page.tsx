@@ -23,10 +23,7 @@ const titleTransition: Transition = { ...springFast, delay: 0.2 };
 
 const chipsContainer: Variants = {
     hidden: { opacity: 0 },
-    visible: {
-        opacity: 1,
-        transition: { delayChildren: 0.2, staggerChildren: 0.18 },
-    },
+    visible: { opacity: 1, transition: { delayChildren: 0.2, staggerChildren: 0.18 } },
 };
 const chipItem: Variants = {
     hidden: { opacity: 0, y: 50 },
@@ -34,10 +31,7 @@ const chipItem: Variants = {
 };
 const textContainer: Variants = {
     hidden: { opacity: 0 },
-    visible: {
-        opacity: 1,
-        transition: { delayChildren: 0.4, staggerChildren: 0.1 },
-    },
+    visible: { opacity: 1, transition: { delayChildren: 0.4, staggerChildren: 0.1 } },
 };
 const textLine: Variants = {
     hidden: { opacity: 0, y: 20 },
@@ -71,7 +65,6 @@ const descriptionLines = [
 ];
 
 export default function NeverEverPage() {
-    /** ====== Получение категорий ====== */
     const [categories, setCategories] = useState<Category[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -185,11 +178,7 @@ export default function NeverEverPage() {
                 >
                     {categories.map((cat) => (
                         <motion.div key={cat.id} variants={categoryItem}>
-                            <CategoryCard
-                                label={cat.label}
-                                src={cat.icon}
-                                color={cat.color}
-                            />
+                            <CategoryCard label={cat.label} src={cat.icon} color={cat.color} />
                         </motion.div>
                     ))}
                 </motion.div>
