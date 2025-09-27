@@ -4,22 +4,20 @@ import fetch from "node-fetch";
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Проксируем все запросы /api/*
 app.use("/api", async (req, res) => {
-    const targetUrl = `https://gamehub-client.monkeyslab.ru${req.originalUrl}`;
-
     try {
+        // убираем "/api" из начала пути
+        const targetPath = req.originalUrl.replace(/^\/api/, "");
+        const targetUrl = `https://gamehub-client.monkeyslab.ru${targetPath}`;
+
+        console.log("➡️ Proxying:", targetUrl);
+
         const response = await fetch(targetUrl, {
             method: req.method,
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: req.method !== "GET" && req.method !== "HEAD" ? req.body : undefined,
+            headers: { "Content-Type": "application/json" },
         });
 
         const data = await response.text();
-
-        res.set("Content-Type", response.headers.get("content-type") || "application/json");
         res.status(response.status).send(data);
     } catch (err) {
         console.error(err);
@@ -28,5 +26,5 @@ app.use("/api", async (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Proxy server running on port ${PORT}`);
+    console.log(`✅ Proxy server running on port ${PORT}`);
 });
