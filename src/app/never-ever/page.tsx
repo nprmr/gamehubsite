@@ -79,14 +79,23 @@ export default function NeverEverPage() {
     useEffect(() => {
         void (async () => {
             try {
-                // ⚡️ Используем относительный путь — /api/
-                const res = await fetch("/api/games/never-ever/categories", {
-                    cache: "no-store",
-                });
+                const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+                if (!apiUrl) {
+                    setError("API URL не задан");
+                    setLoading(false);
+                    return;
+                }
+
+                const res = await fetch(
+                    `${apiUrl}/api/games/never-ever/categories`,
+                    { cache: "no-store" }
+                );
+
                 if (!res.ok) {
                     setError(`Ошибка ${res.status}`);
                     return;
                 }
+
                 const data: Category[] = await res.json();
                 setCategories(data);
             } catch (err: unknown) {
