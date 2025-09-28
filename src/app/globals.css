@@ -23,7 +23,7 @@ body {
     min-height: 100%;
     margin: 0;
     padding: 0;
-    background: #151515; /* дефолтный фон — всегда черный */
+    background: transparent; /* дефолтный фон — всегда черный */
     color: var(--foreground);
     font-family: Arial, Helvetica, sans-serif;
 }

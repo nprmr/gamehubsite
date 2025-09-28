@@ -121,9 +121,9 @@ export default function NeverEverPage() {
             <section className="categories-section w-full max-w-[1024px] with-playbutton-space">
                 <motion.h2
                     initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={springFast}
+                    whileInView="visible"
                     viewport={{ once: true, amount: 0.2 }}
+                    transition={springFast}
                     className="text-white text-3xl font-bold mb-6 categories-title"
                 >
                     Список категорий:
@@ -165,8 +165,9 @@ export default function NeverEverPage() {
           w-full flex justify-center
           fixed left-0 right-0 md:relative
           pointer-events-none md:pointer-events-auto
-          safe-bottom z-20
+          z-20
         "
+                style={{ bottom: "calc(env(safe-area-inset-bottom) + 16px)" }}
             >
                 <div className="pointer-events-auto flex justify-center w-full">
                     <PlayButton text="Играть" onClick={() => console.log("Play clicked")} />
