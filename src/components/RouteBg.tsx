@@ -8,7 +8,7 @@ export default function RouteBg() {
     const pathname = usePathname();
     const isNeverEver = pathname?.startsWith("/never-ever");
 
-    // JS-фиксация для старых Safari
+    // Фиксация высоты для старых Safari
     const [vh, setVh] = useState("100vh");
 
     useEffect(() => {
@@ -28,9 +28,10 @@ export default function RouteBg() {
                     className="fixed left-0 top-0 w-full z-0 pointer-events-none"
                     style={{
                         background: "#FFA724",
-                        height: "100dvh", // новые браузеры
-                        minHeight: vh, // fallback для старых iOS
-                        paddingBottom: "env(safe-area-inset-bottom)", // перекрытие home indicator
+                        height: "100dvh",       // новые браузеры
+                        minHeight: vh,          // старые Safari
+                        paddingBottom: "env(safe-area-inset-bottom)", // перекрываем home indicator
+                        paddingTop: "env(safe-area-inset-top)",
                     }}
                     initial={{ clipPath: "ellipse(0% 0% at 100% 100%)" }}
                     animate={{ clipPath: "ellipse(200% 200% at 100% 100%)" }}
