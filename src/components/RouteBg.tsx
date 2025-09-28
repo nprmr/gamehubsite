@@ -25,11 +25,11 @@ export default function RouteBg() {
             {isNeverEver && (
                 <motion.div
                     key="bg-never-ever"
-                    className="fixed inset-0 w-full h-full pointer-events-none z-0"
+                    className="fixed inset-0 pointer-events-none z-0"
                     style={{
                         background: "#FFA724",
-                        height: "100dvh", // новые браузеры
-                        minHeight: vh,    // fallback для старых
+                        height: "100dvh", // для новых браузеров
+                        minHeight: vh,    // fallback для старых Safari
                     }}
                     initial={{ clipPath: "ellipse(0% 0% at 100% 100%)" }}
                     animate={{ clipPath: "ellipse(200% 200% at 100% 100%)" }}
