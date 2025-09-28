@@ -28,21 +28,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="ru">
         <head>
-            {/* важно для работы safe-area и динамических единиц dvh/svh */}
-            <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-            {/* Подсказываем Safari использовать тёмную палитру для «прозрачных» баров */}
+            <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1, viewport-fit=cover"
+            />
+            {/* для прозрачных баров iOS */}
             <meta name="color-scheme" content="dark light" />
-            {/* Дефолтный цвет бара вне never-ever; на самой странице RouteBg переключит на transparent */}
             <meta name="theme-color" content="#151515" />
         </head>
         <body className={`${adventPro.className} min-h-screen relative`}>
         {/* Шапка */}
         <Header />
 
-        {/* Анимированный фон (под контентом и под браузерными барами) */}
+        {/* Анимированный фон */}
         <RouteBg />
 
-        {/* Контент выше фона; safe-top, чтобы не упираться в статус-бар контентом */}
+        {/* Контент */}
         <div className="relative z-10 pt-[72px] safe-top">{children}</div>
         </body>
         </html>
