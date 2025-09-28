@@ -24,28 +24,27 @@ export const metadata: Metadata = {
     },
 };
 
-export default function RootLayout({
-                                       children,
-                                   }: {
-    children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="ru">
         <head>
-            {/* важно для работы с safe-area на iOS */}
+            {/* важно для работы safe-area на iOS */}
             <meta
                 name="viewport"
                 content="width=device-width, initial-scale=1, viewport-fit=cover"
             />
+            {/* прозрачный статусбар для iOS/PWA */}
+            <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+            <meta name="theme-color" content="rgba(0,0,0,0)" />
         </head>
         <body className={`${adventPro.className} min-h-screen relative`}>
         {/* Шапка */}
         <Header />
 
-        {/* Анимированный фон (раскрытие из правого нижнего угла) */}
+        {/* Анимированный фон */}
         <RouteBg />
 
-        {/* Контент выше фона; safe-top, чтобы не упираться в статусбар */}
+        {/* Контент выше фона */}
         <div className="relative z-10 pt-[72px] safe-top">{children}</div>
         </body>
         </html>

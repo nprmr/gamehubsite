@@ -3,6 +3,7 @@
 /* === ПЕРЕМЕННЫЕ === */
 :root {
     --foreground: #171717;
+    --page-bg: #151515; /* дефолтный фон для всех страниц */
 }
 
 @theme inline {
@@ -23,23 +24,28 @@ body {
     min-height: 100%;
     margin: 0;
     padding: 0;
-    background: #151515; /* дефолтный фон — всегда черный */
+    background: var(--page-bg); /* <-- теперь фон через переменную */
     color: var(--foreground);
     font-family: Arial, Helvetica, sans-serif;
 }
 
+/* когда мы на странице never-ever — делаем фон прозрачным */
+.neverever-active {
+    --page-bg: transparent;
+}
+
 /* ===== SAFE-AREA УТИЛИТЫ ===== */
 .safe-top {
-    padding-top: env(safe-area-inset-top);
+    padding-top: env(safe-area-inset-top, 0);
 }
 .safe-bottom {
-    padding-bottom: env(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom, 0);
 }
 .safe-left {
-    padding-left: env(safe-area-inset-left);
+    padding-left: env(safe-area-inset-left, 0);
 }
 .safe-right {
-    padding-right: env(safe-area-inset-right);
+    padding-right: env(safe-area-inset-right, 0);
 }
 
 /* Отступ для блока категорий под фиксированную кнопку */

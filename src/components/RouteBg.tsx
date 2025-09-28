@@ -16,13 +16,28 @@ export default function RouteBg() {
         return () => window.removeEventListener("resize", updateVh);
     }, []);
 
+    // переключаем фон body только на этой странице
+    useEffect(() => {
+        const root = document.documentElement;
+        if (isNeverEver) {
+            root.classList.add("neverever-active");
+        } else {
+            root.classList.remove("neverever-active");
+        }
+        return () => root.classList.remove("neverever-active");
+    }, [isNeverEver]);
+
     return (
         <AnimatePresence mode="wait">
             {isNeverEver && (
                 <motion.div
                     key="bg-never-ever"
-                    className="fixed inset-0 pointer-events-none z-0"
+                    className="fixed pointer-events-none z-0"
                     style={{
+                        top: "calc(-1 * env(safe-area-inset-top, 0px))",
+                        right: "calc(-1 * env(safe-area-inset-right, 0px))",
+                        bottom: "calc(-1 * env(safe-area-inset-bottom, 0px))",
+                        left: "calc(-1 * env(safe-area-inset-left, 0px))",
                         background: "#FFA724",
                         height: "100dvh",
                         minHeight: vh,
