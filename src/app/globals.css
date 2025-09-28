@@ -31,7 +31,7 @@ body {
 
 /* когда мы на странице never-ever — делаем фон прозрачным */
 .neverever-active {
-    --page-bg: transparent;
+    --page-bg: #151515;
 }
 
 /* ===== SAFE-AREA УТИЛИТЫ ===== */
