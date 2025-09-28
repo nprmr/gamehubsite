@@ -28,13 +28,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="ru">
         <head>
+            {/* Safe-area и прозрачные бары в iOS Safari */}
             <meta
                 name="viewport"
                 content="width=device-width, initial-scale=1, viewport-fit=cover"
             />
-            {/* для прозрачных баров iOS */}
             <meta name="color-scheme" content="dark light" />
-            <meta name="theme-color" content="#151515" />
+            <meta name="theme-color" content="transparent" />
         </head>
         <body className={`${adventPro.className} min-h-screen relative`}>
         {/* Шапка */}
