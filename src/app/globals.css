@@ -3,8 +3,6 @@
 /* === ПЕРЕМЕННЫЕ === */
 :root {
     --foreground: #171717;
-    --page-bg: #151515; /* дефолтный фон */
-    --isl-vh: 1vh;      /* динамическая высота */
 }
 
 @theme inline {
@@ -24,22 +22,18 @@ html,
 body {
     min-height: 100%;
     margin: 0;
-    padding: env(safe-area-inset-top)
-    env(safe-area-inset-right)
-    env(safe-area-inset-bottom)
-    env(safe-area-inset-left);
-    background: var(--page-bg);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: scroll; /* fixed ломает Safari 26 */
+    padding: 0;
+    background: transparent !important; /* ключевой момент */
     color: var(--foreground);
     font-family: Arial, Helvetica, sans-serif;
 }
 
-/* на /never-ever — фон прозрачный */
-.neverever-active {
-    --page-bg: transparent;
+/* ===== SITE-BG (фон для обычных страниц) ===== */
+.site-bg {
+    position: fixed;
+    inset: 0;
+    background: #151515;
+    z-index: 0;
 }
 
 /* ===== SAFE-AREA УТИЛИТЫ ===== */
@@ -47,19 +41,6 @@ body {
 .safe-bottom { padding-bottom: env(safe-area-inset-bottom, 0); }
 .safe-left   { padding-left:   env(safe-area-inset-left, 0); }
 .safe-right  { padding-right:  env(safe-area-inset-right, 0); }
-
-/* ===== HOLDER / SCROLLER ===== */
-.isl_holder {
-    position: fixed;
-    top: calc(-1 * env(safe-area-inset-top, 0px));
-    right: calc(-1 * env(safe-area-inset-right, 0px));
-    bottom: calc(-1 * env(safe-area-inset-bottom, 0px));
-    left: calc(-1 * env(safe-area-inset-left, 0px));
-    width: 100%;
-    height: calc(var(--isl-vh) * 100);
-    overflow: hidden;
-    z-index: 0;
-}
 
 /* ===== FIX кнопки ===== */
 .playbutton,

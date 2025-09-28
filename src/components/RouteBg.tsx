@@ -8,33 +8,12 @@ export default function RouteBg() {
     const pathname = usePathname();
     const isNeverEver = pathname?.startsWith("/never-ever");
 
-    // обновляем CSS-переменную --isl-vh
-    useEffect(() => {
-        const setVh = () => {
-            document.documentElement.style.setProperty(
-                "--isl-vh",
-                `${window.innerHeight * 0.01}px`
-            );
-        };
-        setVh();
-        window.addEventListener("resize", setVh);
-        return () => window.removeEventListener("resize", setVh);
-    }, []);
-
-    // переключаем класс для прозрачного фона
-    useEffect(() => {
-        const root = document.documentElement;
-        if (isNeverEver) root.classList.add("neverever-active");
-        else root.classList.remove("neverever-active");
-        return () => root.classList.remove("neverever-active");
-    }, [isNeverEver]);
-
-    // пересоздаём theme-color
+    // theme-color для Safari
     useEffect(() => {
         document.querySelectorAll('meta[name="theme-color"]').forEach((el) => el.remove());
         const meta = document.createElement("meta");
         meta.name = "theme-color";
-        meta.content = isNeverEver ? "transparent" : "#151515";
+        meta.content = "transparent"; // всегда прозрачный
         document.head.appendChild(meta);
     }, [isNeverEver]);
 
@@ -43,8 +22,15 @@ export default function RouteBg() {
             {isNeverEver && (
                 <motion.div
                     key="bg-never-ever"
-                    className="isl_holder pointer-events-none"
-                    style={{ background: "#FFA724" }}
+                    className="fixed pointer-events-none z-0"
+                    style={{
+                        top: "calc(-1 * env(safe-area-inset-top, 0px))",
+                        right: "calc(-1 * env(safe-area-inset-right, 0px))",
+                        bottom: "calc(-1 * env(safe-area-inset-bottom, 0px))",
+                        left: "calc(-1 * env(safe-area-inset-left, 0px))",
+                        background: "#FFA724",
+                        height: "100dvh",
+                    }}
                     initial={{ clipPath: "ellipse(0% 0% at 100% 100%)" }}
                     animate={{ clipPath: "ellipse(200% 200% at 100% 100%)" }}
                     exit={{ clipPath: "ellipse(0% 0% at 100% 100%)" }}
