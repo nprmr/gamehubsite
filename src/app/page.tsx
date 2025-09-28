@@ -14,7 +14,7 @@ export default function HomePage() {
             onClick={() => router.push("/never-ever")}
             className="
           px-12 py-6 rounded-full
-          bg-black text-white font-bold text-3xl
+          bg-white text-black font-bold text-3xl
           shadow-lg transition-colors
           hover:bg-neutral-200
         "
