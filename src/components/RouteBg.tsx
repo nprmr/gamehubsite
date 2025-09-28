@@ -8,13 +8,9 @@ export default function RouteBg() {
     const pathname = usePathname();
     const isNeverEver = pathname?.startsWith("/never-ever");
 
-    // Фиксация высоты для старых Safari
     const [vh, setVh] = useState("100vh");
-
     useEffect(() => {
-        const updateVh = () => {
-            setVh(`${window.innerHeight}px`);
-        };
+        const updateVh = () => setVh(`${window.innerHeight}px`);
         updateVh();
         window.addEventListener("resize", updateVh);
         return () => window.removeEventListener("resize", updateVh);
@@ -25,7 +21,7 @@ export default function RouteBg() {
             {isNeverEver && (
                 <motion.div
                     key="bg-never-ever"
-                    className="fixed inset-0 pointer-events-none -z-0"
+                    className="fixed inset-0 pointer-events-none z-0"
                     style={{
                         background: "#FFA724",
                         height: "100dvh",
