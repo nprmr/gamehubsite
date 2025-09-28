@@ -63,8 +63,8 @@ const descriptionLines = [
 
 export default function NeverEverPage() {
     return (
-        <main className="neverever-page min-h-screen flex flex-col items-center relative z-0">
-        {/* Заголовок + Rive */}
+        <main className="neverever-page min-h-screen flex flex-col items-center relative z-10">
+            {/* Заголовок + Rive */}
             <div className="relative w-full max-w-[1400px] mx-auto desktop-header">
                 <motion.h1
                     initial={{ opacity: 0, y: 50 }}
@@ -94,9 +94,15 @@ export default function NeverEverPage() {
                     animate="visible"
                     className="mt-[16px] flex flex-wrap gap-[40px] justify-center chips-container"
                 >
-                    <motion.div variants={chipItem}><Chip text="14 категорий" /></motion.div>
-                    <motion.div variants={chipItem}><Chip text="1 000 вопросов" /></motion.div>
-                    <motion.div variants={chipItem}><Chip text="от 2-х игроков" /></motion.div>
+                    <motion.div variants={chipItem}>
+                        <Chip text="14 категорий" />
+                    </motion.div>
+                    <motion.div variants={chipItem}>
+                        <Chip text="1 000 вопросов" />
+                    </motion.div>
+                    <motion.div variants={chipItem}>
+                        <Chip text="от 2-х игроков" />
+                    </motion.div>
                 </motion.div>
             </Container>
 
@@ -141,7 +147,7 @@ export default function NeverEverPage() {
                         ["Детство", "/rive/childhood.riv"],
                         ["Семья", "/rive/family.riv"],
                         ["Здоровье и тело", "/rive/heart.riv"],
-                        ["Алкогольные истории", "/rive/alcohol.riv"],
+                        ["Алкогольные истории", "/rive/alchohol.riv"],
                         ["Секс и интим", "/rive/sex.riv"],
                         ["Фантазии и мечты", "/rive/dream.riv"],
                         ["Путешествия", "/rive/travel.riv"],
@@ -163,13 +169,13 @@ export default function NeverEverPage() {
             <div
                 className="
           w-full flex justify-center
-          fixed bottom-4 left-0 right-0 md:relative
+          fixed left-0 right-0 md:relative
           pointer-events-none md:pointer-events-auto
-          safe-bottom
         "
+                style={{ bottom: "calc(env(safe-area-inset-bottom) + 16px)" }}
             >
                 <div className="pointer-events-auto flex justify-center w-full">
-                    <PlayButton text="Играть" onClick={() => console.log('Play clicked')} />
+                    <PlayButton text="Играть" onClick={() => console.log("Play clicked")} />
                 </div>
             </div>
         </main>
