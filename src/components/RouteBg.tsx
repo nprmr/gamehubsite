@@ -13,7 +13,6 @@ export default function RouteBg() {
 
     useEffect(() => {
         const updateVh = () => {
-            // всегда берём реальную высоту окна
             setVh(`${window.innerHeight}px`);
         };
         updateVh();
@@ -29,15 +28,14 @@ export default function RouteBg() {
                     className="fixed left-0 top-0 w-full z-0 pointer-events-none"
                     style={{
                         background: "#FFA724",
-                        // Современные браузеры используют 100dvh
-                        // Старые получат JS-фиксацию через window.innerHeight
-                        height: "100dvh",
-                        minHeight: vh,
+                        height: "100dvh", // новые браузеры
+                        minHeight: vh, // fallback для старых iOS
+                        paddingBottom: "env(safe-area-inset-bottom)", // перекрытие home indicator
                     }}
-                    initial={{ clipPath: "ellipse(0% 0% at 100% 100%)" }} // старт: крошечный овал в правом нижнем углу
-                    animate={{ clipPath: "ellipse(200% 200% at 100% 100%)" }} // овал расширяется так, что перекрывает экран
-                    exit={{ clipPath: "ellipse(0% 0% at 100% 100%)" }} // при уходе сжимается обратно
-                    transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }} // плавное ease-out
+                    initial={{ clipPath: "ellipse(0% 0% at 100% 100%)" }}
+                    animate={{ clipPath: "ellipse(200% 200% at 100% 100%)" }}
+                    exit={{ clipPath: "ellipse(0% 0% at 100% 100%)" }}
+                    transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
                 />
             )}
         </AnimatePresence>
