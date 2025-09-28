@@ -63,8 +63,8 @@ const descriptionLines = [
 
 export default function NeverEverPage() {
     return (
-        <main className="neverever-page min-h-screen flex flex-col items-center relative">
-            {/* Заголовок + Rive */}
+        <main className="neverever-page min-h-screen flex flex-col items-center relative z-0">
+        {/* Заголовок + Rive */}
             <div className="relative w-full max-w-[1400px] mx-auto desktop-header">
                 <motion.h1
                     initial={{ opacity: 0, y: 50 }}
