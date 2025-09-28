@@ -63,7 +63,7 @@ const descriptionLines = [
 
 export default function NeverEverPage() {
     return (
-        <main className="neverever-page min-h-screen flex flex-col items-center relative z-10">
+        <main className="neverever-page min-h-screen flex flex-col items-center relative z-10 safe-top safe-bottom">
             {/* Заголовок + Rive */}
             <div className="relative w-full max-w-[1400px] mx-auto desktop-header">
                 <motion.h1
@@ -94,15 +94,9 @@ export default function NeverEverPage() {
                     animate="visible"
                     className="mt-[16px] flex flex-wrap gap-[40px] justify-center chips-container"
                 >
-                    <motion.div variants={chipItem}>
-                        <Chip text="14 категорий" />
-                    </motion.div>
-                    <motion.div variants={chipItem}>
-                        <Chip text="1 000 вопросов" />
-                    </motion.div>
-                    <motion.div variants={chipItem}>
-                        <Chip text="от 2-х игроков" />
-                    </motion.div>
+                    <motion.div variants={chipItem}><Chip text="14 категорий" /></motion.div>
+                    <motion.div variants={chipItem}><Chip text="1 000 вопросов" /></motion.div>
+                    <motion.div variants={chipItem}><Chip text="от 2-х игроков" /></motion.div>
                 </motion.div>
             </Container>
 
@@ -127,9 +121,9 @@ export default function NeverEverPage() {
             <section className="categories-section w-full max-w-[1024px] with-playbutton-space">
                 <motion.h2
                     initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={springFast}
+                    whileInView="visible"
                     viewport={{ once: true, amount: 0.2 }}
+                    transition={springFast}
                     className="text-white text-3xl font-bold mb-6 categories-title"
                 >
                     Список категорий:
@@ -147,7 +141,7 @@ export default function NeverEverPage() {
                         ["Детство", "/rive/childhood.riv"],
                         ["Семья", "/rive/family.riv"],
                         ["Здоровье и тело", "/rive/heart.riv"],
-                        ["Алкогольные истории", "/rive/alchohol.riv"],
+                        ["Алкогольные истории", "/rive/alcohol.riv"],
                         ["Секс и интим", "/rive/sex.riv"],
                         ["Фантазии и мечты", "/rive/dream.riv"],
                         ["Путешествия", "/rive/travel.riv"],
@@ -171,6 +165,7 @@ export default function NeverEverPage() {
           w-full flex justify-center
           fixed left-0 right-0 md:relative
           pointer-events-none md:pointer-events-auto
+          z-20
         "
                 style={{ bottom: "calc(env(safe-area-inset-bottom) + 16px)" }}
             >
