@@ -8,7 +8,7 @@ export default function RouteBg() {
     const pathname = usePathname();
     const isNeverEver = pathname?.startsWith("/never-ever");
 
-    // обновляем CSS-переменную --isl-vh для корректной высоты
+    // обновляем CSS-переменную --isl-vh
     useEffect(() => {
         const setVh = () => {
             document.documentElement.style.setProperty(
@@ -29,12 +29,9 @@ export default function RouteBg() {
         return () => root.classList.remove("neverever-active");
     }, [isNeverEver]);
 
-    // пересоздаём theme-color, чтобы Safari точно обновил цвет панелей
+    // пересоздаём theme-color
     useEffect(() => {
-        // удаляем старый тег
         document.querySelectorAll('meta[name="theme-color"]').forEach((el) => el.remove());
-
-        // создаём новый
         const meta = document.createElement("meta");
         meta.name = "theme-color";
         meta.content = isNeverEver ? "transparent" : "#151515";
@@ -46,15 +43,8 @@ export default function RouteBg() {
             {isNeverEver && (
                 <motion.div
                     key="bg-never-ever"
-                    className="fixed pointer-events-none z-0"
-                    style={{
-                        top: "calc(-1 * env(safe-area-inset-top, 0px))",
-                        right: "calc(-1 * env(safe-area-inset-right, 0px))",
-                        bottom: "calc(-1 * env(safe-area-inset-bottom, 0px))",
-                        left: "calc(-1 * env(safe-area-inset-left, 0px))",
-                        height: "calc(var(--isl-vh) * 100)",
-                        background: "#FFA724",
-                    }}
+                    className="isl_holder pointer-events-none"
+                    style={{ background: "#FFA724" }}
                     initial={{ clipPath: "ellipse(0% 0% at 100% 100%)" }}
                     animate={{ clipPath: "ellipse(200% 200% at 100% 100%)" }}
                     exit={{ clipPath: "ellipse(0% 0% at 100% 100%)" }}
