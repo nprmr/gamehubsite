@@ -25,7 +25,7 @@ export default function RouteBg() {
             {isNeverEver && (
                 <motion.div
                     key="bg-never-ever"
-                    className="fixed inset-0 pointer-events-none -z-10"
+                    className="fixed inset-0 pointer-events-none -z-0"
                     style={{
                         background: "#FFA724",
                         height: "100dvh",
