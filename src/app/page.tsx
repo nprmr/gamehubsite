@@ -165,7 +165,7 @@ export default function NeverEverPage() {
           w-full flex justify-center
           fixed left-0 right-0 md:relative
           pointer-events-none md:pointer-events-auto
-          safe-bottom
+          safe-bottom z-20
         "
             >
                 <div className="pointer-events-auto flex justify-center w-full">
